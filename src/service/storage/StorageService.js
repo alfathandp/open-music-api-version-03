@@ -14,7 +14,6 @@ class StorageService {
     const path = `${this._folder}/${filename}`;
 
     const fileStream = fs.createWriteStream(path);
-
     return new Promise((resolve, reject) => {
       fileStream.on('error', (error) => reject(error));
       file.pipe(fileStream);

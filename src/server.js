@@ -29,8 +29,8 @@ const PlaylistsValidator = require('./validator/playlists');
 
 // playlist_songs junction
 const playlistSongs = require('./api/playlistSongs');
-const SongsAtPlaylistValidator = require('./validator/playlist_songs_junction');
-const SongsAtPlaylistService = require('./service/postgres/Playlist_songs_junction');
+const SongsAtPlaylistValidator = require('./validator/playlistSongs');
+const SongsAtPlaylistService = require('./service/postgres/PlaylistSongsService');
 const ClientError = require('./exceptions/ClientError');
 
 // Collaborations

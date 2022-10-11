@@ -21,14 +21,16 @@ class AlbumsLikesHandler {
 
   async getLikesHandler(request, h) {
     const {id} = request.params;
-    const likes = await this._service.getLikes(id);
+    const {likes, isCache} = await this._service.getLikes(id);
     const response = h.response({
       status: 'success',
       data: {
         likes,
       },
     });
-    response.header('X-Data-Source', 'cache');
+    if (isCache) {
+      response.header('X-Data-Source', 'cache');
+    }
     return response;
   }
 }

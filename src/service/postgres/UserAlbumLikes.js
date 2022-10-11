@@ -56,15 +56,19 @@ class UserAlbumLikes {
   async getLikes(albumId) {
     try {
       const result = await this._cacheService.get(`likes: ${albumId}`);
-      return JSON.parse(result.rowCount);
+      return {
+        likes: JSON.parse(result),
+        isCache: 1,
+      };
     } catch (error) {
       const query = {
         text: 'SELECT user_id FROM user_album_likes WHERE album_id = $1',
         values: [albumId],
       };
       const result = await this._pool.query(query);
-      await this._cacheService.set(`likes: ${albumId}`, JSON.stringify(result));
-      return result.rowCount;
+      // eslint-disable-next-line max-len
+      await this._cacheService.set(`likes: ${albumId}`, JSON.stringify(result.rowCount));
+      return {likes: result.rowCount};
     }
   }
 }
