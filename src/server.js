@@ -3,6 +3,7 @@ require('dotenv').config();
 const Jwt = require('@hapi/jwt');
 const Hapi = require('@hapi/hapi');
 const path = require('path');
+const config = require('./utils/config');
 
 const albums = require('./api/albums');
 const songs = require('./api/songs');
@@ -69,8 +70,8 @@ const init = async () => {
   const uploadService = new UploadService();
 
   const server = Hapi.server({
-    port: process.env.PORT,
-    host: process.env.HOST,
+    port: config.app.port,
+    host: config.app.host,
     routes: {
       cors: {
         origin: ['*'],
