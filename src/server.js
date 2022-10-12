@@ -4,6 +4,7 @@ const Jwt = require('@hapi/jwt');
 const Hapi = require('@hapi/hapi');
 const path = require('path');
 const config = require('./utils/config');
+const inert = require('@hapi/inert');
 
 const albums = require('./api/albums');
 const songs = require('./api/songs');
@@ -114,6 +115,9 @@ const init = async () => {
   await server.register([
     {
       plugin: Jwt,
+    },
+    {
+      plugin: inert,
     },
   ]);
 
